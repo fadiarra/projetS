@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Application de gestion de stock</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .welcome {
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slide-in-left 1s forwards;
+      color: orange;
+      text-align: center;
+      margin-top: 250px;
+      font-size: 100;
+    }
+    h1{
+        font-size: 70px;
+        margin-top: 30px;
+    }
+    .image {
+      opacity: 0;
+      transform: translateX(100%);
+      animation: slide-in-right 1s forwards;
+      margin-top: 100px;
+      float: right;
+      width: 50%;
+    }
+    img{
+        width: 100%;
+        height: auto;
+        float: right;
+    }
+    .login-button {
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slide-in-left 1.5s forwards;
+      font-size: 25px;
+    }
+    
+    @keyframes slide-in-left {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes slide-in-right {
+      0% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes slide-out-left {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+    @keyframes slide-out-right {
+      0% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 welcome">
+        <h1>Welcome</h1>
+      </div>
+      <div class="col-md-6 image">
+        <img src="stk.jpg" alt="Stock Management App" class="img-fluid">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button id="loginButton" class="btn btn-primary login-button">Connexion</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var welcomeText = document.querySelector('.welcome');
+    var image = document.querySelector('.image');
+    var loginButton = document.getElementById('loginButton');
+
+    setTimeout(function() {
+      welcomeText.style.opacity = '1';
+      welcomeText.style.transform = 'translateX(0)';
+      image.style.opacity = '1';
+      image.style.transform = 'translateX(0)';
+      loginButton.style.opacity = '1';
+      loginButton.style.transform = 'translateX(0)';
+    }, 500);
+
+    loginButton.addEventListener('click', function() {
+      welcomeText.style.animation = 'slide-out-left 1s forwards';
+      image.style.animation = 'slide-out-right 1s forwards';
+      loginButton.style.animation = 'slide-out-left 1s forwards';
+
+      setTimeout(function() {
+        window.location.href = "connexion.php";
+      }, 1000);
+    });
+
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        welcomeText.style.animation = 'slide-in-left 1s forwards';
+        image.style.animation = 'slide-in-right 1s forwards';
+        loginButton.style.animation = 'slide-in-left 1s forwards';
+      }
+    });
+  </script>
+</body>
+</html>
